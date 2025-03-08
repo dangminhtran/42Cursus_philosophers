@@ -6,7 +6,7 @@
 /*   By: dangtran <dangtran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:36:23 by dangtran          #+#    #+#             */
-/*   Updated: 2025/02/28 19:17:57 by dangtran         ###   ########.fr       */
+/*   Updated: 2025/03/08 14:23:17 by dangtran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ typedef struct s_program
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	write_lock;
-	t_philo			*philos;
+	// Pas besoin de faire de malloc, les push avec une loop
+	t_philo			philos[200];
 }					t_program;
+
 
 // MANAGE
 void	init_mutex(t_program *prog);
@@ -71,6 +73,9 @@ void	start_threads(t_program *prog);
 void	destroy_threads(t_program *prog);
 void	init_threads(t_program *prog);
 
-
+// PARSING
+int	ft_isdigit(int c);
+int	is_number(char *str);
+int	check_args(int argc, char **argv);
 
 #endif

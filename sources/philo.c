@@ -6,7 +6,7 @@
 /*   By: dangtran <dangtran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:37:12 by dangtran          #+#    #+#             */
-/*   Updated: 2025/02/28 19:15:30 by dangtran         ###   ########.fr       */
+/*   Updated: 2025/03/08 11:04:33 by dangtran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ size_t	get_time(void)
     return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-// fonction pour obtenir le temps actuel
+// temps actuel
 size_t	get_time_now(t_program *prog)
 {
     return (get_time() - prog->start_time);
@@ -111,7 +111,7 @@ void	start_threads(t_program *prog)
 }
 
 // fonction pour detruire les threads
-void	destroy_threads(t_program *prog)
+void	destroy_mutex(t_program *prog)
 {
     int	i;
 

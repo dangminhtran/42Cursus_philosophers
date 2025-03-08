@@ -6,13 +6,13 @@
 /*   By: dangtran <dangtran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:37:09 by dangtran          #+#    #+#             */
-/*   Updated: 2025/02/28 19:17:45 by dangtran         ###   ########.fr       */
+/*   Updated: 2025/03/08 14:05:49 by dangtran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// fonction pour initialiser les mutex
+// initialiser les mutex
 void	init_mutex(t_program *prog)
 {
     pthread_mutex_init(&prog->dead_lock, NULL);
@@ -28,7 +28,7 @@ void	destroy_mutex(t_program *prog)
     pthread_mutex_destroy(&prog->write_lock);
 }
 
-// fonction pour initialiser les philosophes
+// initialiser les philosophes
 void	init_philos(t_program *prog)
 {
     int	i;
@@ -56,7 +56,7 @@ void	init_philos(t_program *prog)
     }
 }
 
-// fonction pour initialiser le programme
+// Initialiser le programme
 int	init_program(t_program *prog, int argc, char **argv)
 {
     prog->dead_flag = 0;
@@ -66,6 +66,7 @@ int	init_program(t_program *prog, int argc, char **argv)
     prog->time_to_die = ft_atoi(argv[2]);
     prog->time_to_eat = ft_atoi(argv[3]);
     prog->time_to_sleep = ft_atoi(argv[4]);
+    // TODO - faire une boucle avec i < num_of_philos
     prog->philos = malloc(sizeof(t_philo) * prog->num_of_philos);
     if (!prog->philos)
     {

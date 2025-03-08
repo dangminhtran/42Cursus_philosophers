@@ -6,7 +6,7 @@
 #    By: dangtran <dangtran@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/28 18:38:00 by dangtran          #+#    #+#              #
-#    Updated: 2025/02/28 18:38:40 by dangtran         ###   ########.fr        #
+#    Updated: 2025/03/08 14:23:03 by dangtran         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 
 CFLAGS= -Wall -Wextra -Werror -I${HEADER_DIR} -g
 
-SRCS_DIR = 	$(addprefix sources/, manage.c philo.c main.c)
+SRCS_DIR = 	$(addprefix sources/, parsing.c manage.c philo.c main.c)
 
 SRCS_OBJ = ${SRCS_DIR:.c=.o}
 

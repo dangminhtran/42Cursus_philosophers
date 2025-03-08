@@ -6,7 +6,7 @@
 /*   By: dangtran <dangtran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:37:15 by dangtran          #+#    #+#             */
-/*   Updated: 2025/02/28 19:18:00 by dangtran         ###   ########.fr       */
+/*   Updated: 2025/03/08 14:24:33 by dangtran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int main(int argc, char **argv)
         printf("Error: wrong number of arguments\n");
         return (1);
     }
-    if (init_program(&prog, argc, argv))
+    if (!check_args(argc, argv))
+        return (1);
+    if (!init_program(&prog, argc, argv))
         return (1);
     init_mutex(&prog);
     init_philos(&prog);
