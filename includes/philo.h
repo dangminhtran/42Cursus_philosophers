@@ -19,6 +19,8 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+# define PHILO_MAX 200
+
 typedef struct s_philo
 {
 	pthread_t		thread;
@@ -31,7 +33,7 @@ typedef struct s_philo
 	size_t			time_to_sleep;
 	size_t			start_time;
 	int				num_of_philos;
-	int				num_times_to_eat;
+	int				nb_meals_to_eat;
 	int				*dead;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
@@ -43,39 +45,46 @@ typedef struct s_philo
 typedef struct s_program
 {
 	int				dead_flag;
-    int             num_of_philos;
-    int             num_times_to_eat;
-    size_t			start_time;
-    size_t			time_to_die;
-    size_t			time_to_eat;
-    size_t			time_to_sleep;
+	t_philo			*philos;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	write_lock;
-	// Pas besoin de faire de malloc, les push avec une loop
-	t_philo			philos[200];
 }					t_program;
 
+// INIT
+void    init_args(t_philo *philo, char **argv);
+void	init_forks(pthread_mutex_t *forks, int philo_num);
+void	init_philos(t_philo *philos, t_program *prog, pthread_mutex_t *forks, char **argv);
+void	init_program(t_program *program, t_philo *philos);
 
-// MANAGE
-void	init_mutex(t_program *prog);
-void	destroy_mutex(t_program *prog);
-void	init_philos(t_program *prog);
-int 	init_program(t_program *prog, int argc, char **argv);
-void    destroy_program(t_program *prog);
+// CHECK
+int	is_dead(t_philo *philo, size_t time_to_die);
+int	check_death(t_philo *philos);
+int	check_meals(t_philo *philos);
+void	*check_routine(void *pointer);
+int	check_dead_flag(t_philo *philo);
+
+// ROUTINE
+void	print_message(char *message, t_philo *philo, int id);
+void    is_thinking(t_philo *philo);
+void    is_sleeping(t_philo *philo);
+void	is_eating(t_philo *philo);
 
 // PHILO
-void	print_message(size_t time, int id, char *message, t_program *prog);
-void	check_death(t_philo *ph, t_program *prog);
-void	check_meals(t_philo *ph, t_program *prog);
-void	*philo_routine(void *philo);
-void	start_threads(t_program *prog);
-void	destroy_threads(t_program *prog);
-void	init_threads(t_program *prog);
+void    *philo_routine(void *var);
+int	start_threads(t_program *prog, pthread_mutex_t *forks);
+void	destroy_mutex(char *str, t_program *program, pthread_mutex_t *forks);
 
 // PARSING
-int	ft_isdigit(int c);
 int	is_number(char *str);
-int	check_args(int argc, char **argv);
+int	check_arg(char *arg);
+int	check_args(char **argv);
+
+// LIBFT
+int	ft_isdigit(int c);
+int	ft_strlen(char *str);
+int	ft_atoi(char *str);
+int	ft_usleep(size_t milliseconds);
+size_t	get_time(void);
 
 #endif

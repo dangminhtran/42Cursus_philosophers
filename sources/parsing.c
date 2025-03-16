@@ -13,14 +13,6 @@
 #include "philo.h"
 
 /**
- * @brief Check if the arguments are valid
- */
-int	ft_isdigit(int c)
-{
-	return (c >= '0' && c <= '9');
-}
-
-/**
  * @brief Check if the arguments are numbers
  */
 int	is_number(char *str)
@@ -37,32 +29,37 @@ int	is_number(char *str)
 	return (1);
 }
 
-/**
- * @brief Check if the arguments are valid
- */
-int	check_args(int argc, char **argv)
+int	check_arg(char *arg)
 {
 	int	i;
 
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (arg[i] != '\0')
 	{
-		if (!is_number(argv[i]))
-		{
-			printf("Error: arguments must be numbers\n");
+		if (arg[i] < '0' || arg[i] > '9')
 			return (1);
-		}
-		if (ft_atoi(argv[i]) < 0)
-		{
-			printf("Error: arguments must be positive\n");
-			return (1);
-		}
-		if (i == 1 && ft_atoi(argv[i]) > 200)
-		{
-			printf("Error: number of philosophers must be less than 200\n");
-			return (1);
-		}
 		i++;
 	}
+	return (0);
+}
+
+
+/**
+ * @brief Check if the arguments are valid
+ */
+int	check_args(char **argv)
+{
+	if (ft_atoi(argv[1]) > PHILO_MAX || ft_atoi(argv[1]) <= 0
+		|| check_arg(argv[1]) == 1)
+		return (write(2, "Invalid philosophers number\n", 29), 1);
+	if (ft_atoi(argv[2]) <= 0 || check_arg(argv[2]) == 1)
+		return (write(2, "Invalid time to die\n", 21), 1);
+	if (ft_atoi(argv[3]) <= 0 || check_arg(argv[3]) == 1)
+		return (write(2, "Invalid time to eat\n", 21), 1);
+	if (ft_atoi(argv[4]) <= 0 || check_arg(argv[4]) == 1)
+		return (write(2, "Invalid time to sleep\n", 23), 1);
+	if (argv[5] && (ft_atoi(argv[5]) < 0 || check_arg(argv[5]) == 1))
+		return (write(2, "Invalid number of times each philosopher must eat\n",
+				51), 1);
 	return (0);
 }

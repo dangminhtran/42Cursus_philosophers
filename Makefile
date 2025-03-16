@@ -16,7 +16,7 @@ CC = cc
 
 CFLAGS= -Wall -Wextra -Werror -I${HEADER_DIR} -g
 
-SRCS_DIR = 	$(addprefix sources/, parsing.c manage.c philo.c main.c)
+SRCS_DIR = 	$(addprefix sources/, check.c init.c libft.c main.c parsing.c philo.c routine.c )
 
 SRCS_OBJ = ${SRCS_DIR:.c=.o}
 
